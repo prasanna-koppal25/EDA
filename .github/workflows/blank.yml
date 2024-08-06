@@ -33,6 +33,9 @@ jobs:
           # Lint your API using Postman CLI
           postman api lint 1f84a52b-26c7-4030-9bb1-66d25966f976 --integration-id 166860
 
+      - name: List files in newman directory
+        run: dir newman
+        
       - name: Upload HTML report
         uses: actions/upload-artifact@v3
         with:
