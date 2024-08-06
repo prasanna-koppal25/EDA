@@ -14,7 +14,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Install Newman and HTML Reporter
         run: npm install -g newman newman-reporter-html
