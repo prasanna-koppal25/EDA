@@ -11,13 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create dir
+        run: |
+          mkdir TestArtifact
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Use a compatible Node.js version
+          node-version: '16.x'  # Use a compatible Node.js version
 
       - name: Install Newman and HTML Reporter
-        run: npm install -g newman@latest newman-reporter-html@latest
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-slackreporter
+          npm install -g newman-reporter-html
+          npm install -g newman-htmlextra
 
       - name: Install Postman CLI
         run: |
@@ -33,15 +41,16 @@ jobs:
 
       - name: Generate HTML report with Newman
         run: |
-          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r html --reporter-html-export newman/report.html
+          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,html --reporter-html-export testArtifacts/htmlreport.html
         continue-on-error: true  # Continue even if this step fails
 
       - name: List files to debug
         run: dir newman
 
-      - name: Upload HTML report
+      # Upload the report to TestArtifact directory
+      - name: Output the result
         uses: actions/upload-artifact@v3
         with:
-          name: postman-html-report
-          path: newman/report.html
+          name: Reports
+          path: TestArtifact
     
