@@ -7,12 +7,13 @@ on:
 
 jobs:
   automated-api-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Create dir
-        run: mkdir TestArtifact
+        run: |
+          mkdir TestArtifact
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -20,11 +21,7 @@ jobs:
           node-version: '16.x'  # Use a compatible Node.js version
 
       - name: Install Newman and HTML Reporter
-        run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
-          npm install --package-lock-only
-          npm audit fix --force
+        run: npm install -g newman@latest newman-reporter-html@latest
 
       - name: Install Postman CLI
         run: |
@@ -40,7 +37,7 @@ jobs:
 
       - name: Generate HTML report with Newman
         run: |
-          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,htmlextra --reporter-htmlextra-export TestArtifact/htmlreport.html
+          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,htmlextra --reporter-html-export TestArtifact/htmlreport.html
         continue-on-error: true  # Continue even if this step fails
 
       - name: List files to debug
