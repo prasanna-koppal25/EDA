@@ -24,14 +24,11 @@ jobs:
 
       - name: Install Postman CLI
         run: |
-          Invoke-WebRequest -Uri "https://dl-cli.pstmn.io/install/windows64.zip" -OutFile "postman-cli-windows64.zip"
-          Expand-Archive -Path "postman-cli-windows64.zip" -DestinationPath "$env:ProgramFiles\Postman"
-          [System.Environment]::SetEnvironmentVariable('PATH', "$env:ProgramFiles\Postman", [System.EnvironmentVariableTarget]::Machine)
-          [System.Environment]::SetEnvironmentVariable('PATH', "$env:ProgramFiles\Postman", [System.EnvironmentVariableTarget]::User)
-
+          powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/win64.ps1'))"
+ 
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-
+        
       - name: Run API tests
         run: |
           postman collection run "${{ github.workspace }}\postman\collections\EDA.json" --integration-id "166860-${{ github.run_id }}"
