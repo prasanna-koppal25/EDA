@@ -7,13 +7,12 @@ on:
 
 jobs:
   automated-api-tests:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Create dir
-        run: |
-          mkdir TestArtifact
+        run: New-Item -Path TestArtifact -ItemType Directory
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -23,36 +22,31 @@ jobs:
       - name: Install Newman and HTML Reporter
         run: npm install -g newman@latest newman-reporter-html@latest
 
-      - name: Install PowerShell
-        run: |
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
-          sudo apt-get update
-          sudo apt-get install -y powershell
-
       - name: Install Postman CLI
         run: |
-          pwsh -Command "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/linux64.ps1'))"
-          
+          Invoke-WebRequest -Uri "https://dl-cli.pstmn.io/install/windows64.zip" -OutFile "postman-cli-windows64.zip"
+          Expand-Archive -Path "postman-cli-windows64.zip" -DestinationPath "$env:ProgramFiles\Postman"
+          [System.Environment]::SetEnvironmentVariable('PATH', "$env:ProgramFiles\Postman", [System.EnvironmentVariableTarget]::Machine)
+          [System.Environment]::SetEnvironmentVariable('PATH', "$env:ProgramFiles\Postman", [System.EnvironmentVariableTarget]::User)
+
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
 
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" --integration-id "166860-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}\postman\collections\EDA.json" --integration-id "166860-${{ github.run_id }}"
           postman api lint 1f84a52b-26c7-4030-9bb1-66d25966f976 --integration-id 166860
 
       - name: Generate HTML report with Newman
         run: |
-          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,htmlextra --reporter-html-export TestArtifact/htmlreport.html
+          newman run "${{ github.workspace }}\postman\collections\EDA.json" -r cli,htmlextra --reporter-htmlextra-export TestArtifact\htmlreport.html
         continue-on-error: true  # Continue even if this step fails
 
       - name: List files to debug
-        run: dir TestArtifact
+        run: Get-ChildItem -Path TestArtifact
 
       - name: Output the result
         uses: actions/upload-artifact@v3
         with:
           name: Reports
           path: TestArtifact
-
