@@ -28,23 +28,25 @@ jobs:
  
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-        
+        continue-on-error: true 
+
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}\postman\collections\EDA.json" --integration-id "166860-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" --integration-id "166860-${{ github.run_id }}"
           postman api lint 1f84a52b-26c7-4030-9bb1-66d25966f976 --integration-id 166860
         continue-on-error: true 
 
       - name: Generate HTML report with Newman
         run: |
-          newman run "${{ github.workspace }}\postman\collections\EDA.json" -r cli,htmlextra --reporter-htmlextra-export TestArtifact\htmlreport.html
-        continue-on-error: true  # Continue even if this step fails
-
-      - name: List files to debug
-        run: Get-ChildItem -Path TestArtifact
+          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,htmlextra --reporter-htmlextra-export TestArtifact/htmlreport.html
+        continue-on-error: true 
+      
+      - name: List files in TestArtifact directory
+        run: Get-ChildItem -Path TestArtifact -Recurse
 
       - name: Output the result
         uses: actions/upload-artifact@v3
         with:
           name: Reports
           path: TestArtifact
+          if-no-files-found: warn
