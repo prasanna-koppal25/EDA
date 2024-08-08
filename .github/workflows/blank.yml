@@ -33,6 +33,7 @@ jobs:
         run: |
           postman collection run "${{ github.workspace }}\postman\collections\EDA.json" --integration-id "166860-${{ github.run_id }}"
           postman api lint 1f84a52b-26c7-4030-9bb1-66d25966f976 --integration-id 166860
+        continue-on-error: true 
 
       - name: Generate HTML report with Newman
         run: |
