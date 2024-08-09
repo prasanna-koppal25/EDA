@@ -1,52 +1,17 @@
 name: Automated API tests using Postman CLI
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   automated-api-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Create dir
-        run: New-Item -Path TestArtifact -ItemType Directory
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'  # Use a compatible Node.js version
-
-      - name: Install Newman and HTML Reporter
-        run: npm install -g newman@latest newman-reporter-html@latest
-
       - name: Install Postman CLI
         run: |
-          powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/win64.ps1'))"
- 
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-        continue-on-error: true 
-
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" --integration-id "166860-${{ github.run_id }}"
-          postman api lint 1f84a52b-26c7-4030-9bb1-66d25966f976 --integration-id 166860
-        continue-on-error: true 
-
-      - name: Generate HTML report with Newman
-        run: |
-          newman run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,htmlextra --reporter-htmlextra-export TestArtifact/htmlreport.html
-        continue-on-error: true 
-      
-      - name: List files in TestArtifact directory
-        run: Get-ChildItem -Path TestArtifact -Recurse
-
-      - name: Output the result
-        uses: actions/upload-artifact@v3
-        with:
-          name: Reports
-          path: TestArtifact
-          if-no-files-found: warn
+          postman collection run "${{ github.workspace }}/postman/collections/EDA.json"
