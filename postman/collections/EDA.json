@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshan@gmail.com\",\r\n  \"sid\": \"Darskjns\",\r\n  \"sub\": \"Ik29\"\r\n}",
+							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshanas@gmail.com\",\r\n  \"sid\": \"Darskjns\",\r\n  \"sub\": \"Ik29\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
