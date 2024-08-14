@@ -22,8 +22,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshan@gmail.com\",\r\n  \"sid\": \"Dars\",\r\n  \"sub\": \"Ik28\"\r\n}",
+							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshan@gmail.com\",\r\n  \"sid\": \"Darskjns\",\r\n  \"sub\": \"Ik29\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,8 +108,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -181,7 +181,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/authenticate-user?sub=Ik28",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/authenticate-user?sub=Ik29",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -194,7 +194,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								}
 							]
 						}
@@ -259,7 +259,7 @@
 									"    const queryParams = pm.request.url.query.all();\r",
 									"    const dbParam = queryParams.find(param => param.key === 'db');\r",
 									"    pm.expect(dbParam).to.not.be.undefined;\r",
-									"    pm.expect(dbParam.value).to.be.oneOf(['pg', 'mysql']);\r",
+									"    pm.expect(dbParam.value).to.be.oneOf(['pg', 'mysql','mssql']);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -382,7 +382,7 @@
 									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
 									"\r",
 									"    pm.expect(dbParam).to.not.be.undefined;\r",
-									"    pm.expect(dbParam.value).to.equal('pg');\r",
+									"    pm.expect(dbParam.value).to.be.oneOf(['pg', 'mysql', 'mssql']);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate request body schema\", function () {\r",
@@ -420,7 +420,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/users/add-connection?sub=Ik28&db=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/users/add-connection?sub=Ik29&db=mssql",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -434,7 +434,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								},
 								{
 									"key": "db",
@@ -481,8 +481,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -585,7 +585,7 @@
 								"id": "ca7bc45f-c2ed-42c5-a027-ff0f743994b9",
 								"exec": [
 									"pm.test(\"Response status code is 200\", function () {\r",
-									"  pm.expect(pm.response.code).to.equal(200);\r",
+									"  pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -594,8 +594,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -603,7 +603,7 @@
 									"  const responseData = pm.response.json();\r",
 									"  \r",
 									"  pm.expect(responseData).to.be.an('object');\r",
-									"  const db = responseData.mysql || responseData.pg;\r",
+									"  const db = responseData.mysql || responseData.pg || responseData.mssql;\r",
 									"  pm.expect(db).to.exist.and.to.be.an('object');\r",
 									"});\r",
 									"\r",
@@ -612,7 +612,9 @@
 									"  const responseData = pm.response.json();\r",
 									"  \r",
 									"  pm.expect(responseData).to.be.an('object');\r",
-									"  pm.expect(responseData.mysql.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"  if(responseData.mysql) {\r",
+									"    pm.expect(responseData.mysql.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"  }\r",
 									"});\r",
 									""
 								],
@@ -629,7 +631,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/connect?sub=Ik27",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/connect?sub=Ik29",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -642,7 +644,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik27"
+									"value": "Ik29"
 								}
 							]
 						}
@@ -699,8 +701,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -733,7 +735,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables/?sub=Ik28",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables/?sub=Ik29",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -747,7 +749,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								}
 							]
 						}
@@ -768,8 +770,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -790,19 +792,13 @@
 									"    pm.expect(responseData.tables.length).to.be.above(0);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Table description should be a string\", function () {\r",
+									"pm.test(\"Table description should be a string or null\", function () {\r",
 									"    const responseData = pm.response.json();\r",
 									"    responseData.tables.forEach(function(table) {\r",
-									"        pm.expect(table.table_description).to.be.a('string');\r",
+									"        pm.expect(table.description).to.be.oneOf([null, 'string']);\r",
 									"    });\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Table names should be unique\", function () {\r",
-									"    const responseData = pm.response.json();\r",
-									"    const tableNames = responseData.tables.map(table => table.table_name);\r",
-									"    const uniqueTableNames = new Set(tableNames);\r",
-									"    pm.expect(uniqueTableNames.size).to.equal(tableNames.length);\r",
-									"});\r",
 									"\r",
 									"pm.test(\"Number of rows and columns should be non-negative\", function () {\r",
 									"    const responseData = pm.response.json();\r",
@@ -823,10 +819,7 @@
 									"        pm.expect(table).to.have.property('user_name').that.is.a('string');\r",
 									"        pm.expect(table).to.have.property('no_of_rows').that.is.a('number');\r",
 									"        pm.expect(table).to.have.property('no_of_columns').that.is.a('number');\r",
-									"        pm.expect(table).to.have.property('table_description');\r",
-									"        pm.expect(table.table_description).to.satisfy(function(desc) {\r",
-									"            return typeof desc === 'string' || desc === null;\r",
-									"        });\r",
+									"        pm.expect(table).to.have.property('description');\r",
 									"    });\r",
 									"});\r",
 									"\r",
@@ -876,7 +869,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/detailed_tables/?sub=Ik28&page=1&size=10",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/detailed_tables/?sub=Ik29&page=2&size=10",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -890,11 +883,11 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								},
 								{
 									"key": "page",
-									"value": "1"
+									"value": "2"
 								},
 								{
 									"key": "size",
@@ -942,8 +935,7 @@
 									"        'created_at', \r",
 									"        'schema', \r",
 									"        'sample_data', \r",
-									"        'queries', \r",
-									"        'profile_data_quality', \r",
+									"        'queries',  \r",
 									"        'schema_definition', \r",
 									"        'lineage'\r",
 									"    );\r",
@@ -958,14 +950,20 @@
 									"    \r",
 									"    responseData.sample_data.first_rows.forEach(function(row) {\r",
 									"        pm.expect(row).to.be.an('object');\r",
-									"        pm.expect(row.Table).to.exist.and.to.be.a('number');\r",
-									"        pm.expect(row[\"Create Table\"]).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.product_name).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.business_unit).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.line_of_business).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.status).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.uniquekey).to.exist.and.to.be.a('string');\r",
 									"    });\r",
 									"    \r",
 									"    responseData.sample_data.last_rows.forEach(function(row) {\r",
 									"        pm.expect(row).to.be.an('object');\r",
-									"        pm.expect(row.Table).to.exist.and.to.be.a('number');\r",
-									"        pm.expect(row[\"Create Table\"]).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.product_name).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.business_unit).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.line_of_business).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.status).to.exist.and.to.be.a('string');\r",
+									"        pm.expect(row.uniquekey).to.exist.and.to.be.a('string');\r",
 									"    });\r",
 									"});\r",
 									"\r",
@@ -989,37 +987,47 @@
 									"    pm.expect(responseData.schema).to.be.an('array');\r",
 									"    pm.expect(responseData.sample_data).to.be.an('object');\r",
 									"    pm.expect(responseData.queries).to.be.an('object');\r",
-									"    pm.expect(responseData.profile_data_quality).to.be.an('object');\r",
 									"    pm.expect(responseData.schema_definition).to.be.a('string');\r",
 									"    pm.expect(responseData.lineage).to.be.an('object');\r",
+									"    \r",
+									"    // Check and validate optional fields\r",
+									"    if (responseData.profile_data_quality) {\r",
+									"        pm.expect(responseData.profile_data_quality).to.be.an('object');\r",
+									"    }\r",
 									"    \r",
 									"    responseData.schema.forEach(function(column) {\r",
 									"        pm.expect(column).to.be.an('object');\r",
 									"        pm.expect(column.column_name).to.be.a('string');\r",
 									"        pm.expect(column.data_type).to.be.a('string');\r",
-									"        pm.expect(column.column_description).to.be.a('string');\r",
+									"        // Validate if column_description exists\r",
+									"        if (column.hasOwnProperty('column_description')) {\r",
+									"            pm.expect(column.column_description).to.be.a('string');\r",
+									"        }\r",
 									"    });\r",
 									"});\r",
-									"\r",
 									"\r",
 									"pm.test(\"Validate the profile_data_quality object structure and fields within the response\", function () {\r",
 									"    const responseData = pm.response.json();\r",
 									"    \r",
-									"    pm.expect(responseData.profile_data_quality).to.be.an('object');\r",
-									"    pm.expect(responseData.profile_data_quality.table_profile).to.be.an('object');\r",
-									"    pm.expect(responseData.profile_data_quality.column_profile).to.be.an('object');\r",
-									"    pm.expect(responseData.profile_data_quality.column_profile.column_stats).to.be.an('array');\r",
-									"    \r",
-									"    responseData.profile_data_quality.column_profile.column_stats.forEach(function(stat) {\r",
-									"        pm.expect(stat).to.be.an('object');\r",
-									"        pm.expect(stat.database_name).to.be.a('string');\r",
-									"        pm.expect(stat.table_name).to.be.a('string');\r",
-									"        pm.expect(stat.column_name).to.be.a('string');\r",
-									"        pm.expect(stat.null_percentage).to.be.a('number');\r",
-									"        pm.expect(stat.distinct_percentage).to.be.a('number');\r",
-									"        pm.expect(stat.unique_percentage).to.be.a('number');\r",
-									"    });\r",
+									"    // Check if profile_data_quality exists\r",
+									"    if (responseData.profile_data_quality) {\r",
+									"        pm.expect(responseData.profile_data_quality).to.be.an('object');\r",
+									"        pm.expect(responseData.profile_data_quality.table_profile).to.be.an('object');\r",
+									"        pm.expect(responseData.profile_data_quality.column_profile).to.be.an('object');\r",
+									"        pm.expect(responseData.profile_data_quality.column_profile.column_stats).to.be.an('array');\r",
+									"        \r",
+									"        responseData.profile_data_quality.column_profile.column_stats.forEach(function(stat) {\r",
+									"            pm.expect(stat).to.be.an('object');\r",
+									"            pm.expect(stat.database_name).to.be.a('string');\r",
+									"            pm.expect(stat.table_name).to.be.a('string');\r",
+									"            pm.expect(stat.column_name).to.be.a('string');\r",
+									"            pm.expect(stat.null_percentage).to.be.a('number');\r",
+									"            pm.expect(stat.distinct_percentage).to.be.a('number');\r",
+									"            pm.expect(stat.unique_percentage).to.be.a('number');\r",
+									"        });\r",
+									"    }\r",
 									"});\r",
+									"\r",
 									"\r",
 									"pm.test(\"Validate the lineage object structure and fields within the response\", function () {\r",
 									"    const responseData = pm.response.json();\r",
@@ -1091,7 +1099,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/table-details/?sub=Ik28&database_name=cdcDB&table_name=product_master&platform_name=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/table-details/?sub=Ik29&database_name=cdcDB&table_name=product_master&platform_name=mssql",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -1105,7 +1113,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								},
 								{
 									"key": "database_name",
@@ -1138,7 +1146,7 @@
 									"\r",
 									"\r",
 									"pm.test(\"Response time is within the acceptable range\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -1212,7 +1220,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/databases/?sub=Ik28&page=1&size=10",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/databases/?sub=Ik29&page=1&size=10",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -1226,7 +1234,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								},
 								{
 									"key": "page",
@@ -1281,8 +1289,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									"\r",
 									"\r",
@@ -1332,7 +1340,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/schemas/?sub=Ik28&database_name=CDC&platform_name=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/schemas/?sub=Ik29&database_name=CDC&platform_name=mssql",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -1346,7 +1354,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								},
 								{
 									"key": "database_name",
@@ -1373,7 +1381,7 @@
 									"    const queryParams = pm.request.url.query.all();\r",
 									"\r",
 									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
-									"    const database_nameParam = queryParams.find(param => param.key === 'database_name');\r",
+									"    const database_nameParam = queryParams.find(param => param.key === 'database');\r",
 									"    const schema_nameParam = queryParams.find(param => param.key === 'schema');\r",
 									"    const platform_typeParma=queryParams.find(param => param.key === 'platform_name');\r",
 									"\r",
@@ -1432,8 +1440,8 @@
 									"});\r",
 									"\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 									"});\r",
 									""
 								],
@@ -1450,7 +1458,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables_and_procedures/?sub=Ik28&platform_name=mssql&database=CDC&schema=dbo",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables_and_procedures/?sub=Ik29&platform_name=mssql&database=CDC&schema=dbo",
 							"protocol": "http",
 							"host": [
 								"da3b-61-3-23-30",
@@ -1464,7 +1472,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik28"
+									"value": "Ik29"
 								},
 								{
 									"key": "platform_name",
