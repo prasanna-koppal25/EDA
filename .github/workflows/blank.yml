@@ -21,10 +21,9 @@ jobs:
       # Install Newman globally and required reporters
       - name: Install Newman and reporters
         run: |
-          npm install -g newman@5 # Latest version of Newman as of August 2024
-          npm install -g newman-reporter-slackreporter@1.0.1 # Update to the latest stable version
-          npm install -g newman-reporter-html@2.0.3 # Update to the latest stable version
-          npm install -g newman-htmlextra@1.0.0 # Update to the latest stable version
+          npm install -g newman@5 # Latest version of Newman
+          npm install -g newman-reporter-html@1.0.3 # Use a stable version that is available
+          npm install -g newman-htmlextra@1.1.0 # Use a stable version that is available
 
       # Install Postman CLI
       - name: Install Postman CLI
