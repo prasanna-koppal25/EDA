@@ -23,7 +23,6 @@ jobs:
         run: |
           npm install -g newman@5 # Latest version of Newman
           npm install -g newman-reporter-html@1.0.3 # Use a stable version that is available
-          npm install -g newman-htmlextra@1.1.0 # Use a stable version that is available
 
       # Install Postman CLI
       - name: Install Postman CLI
