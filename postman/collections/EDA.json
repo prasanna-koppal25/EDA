@@ -97,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"username\":\"ecommUser\",\r\n\"password\":\"prasanna123\",\r\n\"host\":\"localhost\",\r\n\"port\":\"5436\",\r\n\"database\":\"salesforce\"\r\n}",
+							"raw": "{\r\n  \"username\": \"sa\",\r\n  \"password\": \"darshan1234\",\r\n  \"port\": 1433,\r\n  \"host\": \"localhost\",\r\n  \"database\": \"master\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -105,7 +105,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/users/add-connection?sub=Ik27&db=pg",
+							"raw": "http://localhost:8000/users/add-connection?sub=Ik26&db=mssql",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -118,11 +118,11 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik27"
+									"value": "Ik26"
 								},
 								{
 									"key": "db",
-									"value": "pg"
+									"value": "mssql"
 								}
 							]
 						}
@@ -396,7 +396,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/users/delete-connection?sub=Ik26&db=pg",
+							"raw": "http://localhost:8000/users/delete-connection?sub=Ik27&db=mssql",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -409,11 +409,11 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik26"
+									"value": "Ik27"
 								},
 								{
 									"key": "db",
-									"value": "pg"
+									"value": "mssql"
 								}
 							]
 						}
@@ -514,7 +514,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"username\":\"ecommUser\",\r\n\"password\":\"prasanna123\",\r\n\"host\":\"localhost\",\r\n\"port\":\"5436\",\r\n\"database\":\"salesforce\"\r\n}",
+							"raw": "{\r\n  \"username\": \"sa\",\r\n  \"password\": \"darshan1234\",\r\n  \"port\": 1433,\r\n  \"host\": \"localhost\",\r\n  \"database\": \"CDC\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -522,7 +522,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/user/verify-connection?db=pg",
+							"raw": "http://localhost:8000/user/verify-connection?db=mssql",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -535,7 +535,7 @@
 							"query": [
 								{
 									"key": "db",
-									"value": "pg"
+									"value": "mssql"
 								}
 							]
 						}
@@ -624,7 +624,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/connect?sub=Ik27",
+							"raw": "http://localhost:8000/connect?sub=Ik26",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -636,7 +636,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik27"
+									"value": "Ik26"
 								}
 							]
 						}
@@ -751,37 +751,9 @@
 					"name": "Detailed_tables",
 					"event": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"id": "881a319d-23df-436c-94e5-51ee124debca",
-								"exec": [
-									"pm.test(\"Check if 'sub', 'page' and 'size' query parameter is set\", function () {\r",
-									"    const queryParams = pm.request.url.query.all();\r",
-									"\r",
-									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
-									"    const pageParam = queryParams.find(param => param.key === 'page');\r",
-									"    const sizeParam = queryParams.find(param => param.key === 'size');\r",
-									"\r",
-									"    // Check if the 'sub' parameter is defined and not empty\r",
-									"    pm.expect(subParam).to.not.be.undefined;\r",
-									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
-									"\r",
-									"    pm.expect(pageParam).to.not.be.undefined;\r",
-									"    pm.expect(pageParam.value).to.be.a('string').that.is.not.empty;\r",
-									"\r",
-									"    pm.expect(sizeParam).to.not.be.undefined;\r",
-									"    pm.expect(sizeParam.value).to.be.a('string').that.is.not.empty;\r",
-									"\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
 							"listen": "test",
 							"script": {
-								"id": "c379f646-8cbd-403a-8778-4255c7b7db91",
+								"id": "36db4b75-b7fb-4814-a7c8-b13a636ee869",
 								"exec": [
 									"// Fixed syntax error in the last test\r",
 									"pm.test(\"Response status code is 200\", function () {\r",
@@ -859,6 +831,34 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "929674cb-151b-4db0-8721-b7b1eb0a121b",
+								"exec": [
+									"pm.test(\"Check if 'sub', 'page' and 'size' query parameter is set\", function () {\r",
+									"    const queryParams = pm.request.url.query.all();\r",
+									"\r",
+									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
+									"    const pageParam = queryParams.find(param => param.key === 'page');\r",
+									"    const sizeParam = queryParams.find(param => param.key === 'size');\r",
+									"\r",
+									"    // Check if the 'sub' parameter is defined and not empty\r",
+									"    pm.expect(subParam).to.not.be.undefined;\r",
+									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(pageParam).to.not.be.undefined;\r",
+									"    pm.expect(pageParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(sizeParam).to.not.be.undefined;\r",
+									"    pm.expect(sizeParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"id": "06b3e919-8676-4670-9a0c-f29ea3d96159",
@@ -869,7 +869,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/detailed_tables/?sub=Ik27&page=2&size=10",
+							"raw": "http://localhost:8000/detailed_tables/?sub=Ik26&page=1&size=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -882,15 +882,15 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik27"
+									"value": "Ik26"
 								},
 								{
 									"key": "page",
-									"value": "2"
+									"value": "1"
 								},
 								{
 									"key": "size",
-									"value": "10"
+									"value": "5"
 								}
 							]
 						}
@@ -1068,9 +1068,6 @@
 									"\r",
 									"    pm.expect(platform_typeParma).to.not.be.undefined;\r",
 									"    pm.expect(platform_typeParma.value).to.be.a('string').that.is.not.empty;\r",
-									"\r",
-									"\r",
-									"\r",
 									"});"
 								],
 								"type": "text/javascript",
@@ -1086,7 +1083,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/table-details/?sub=Ik27&database_name=Q1&table_name=customer&platform_name=pg",
+							"raw": "http://localhost:8000/table-details/?sub=Ik26&database_name=mydata&table_name=customer&platform_name=mysql",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1099,11 +1096,11 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik27"
+									"value": "Ik26"
 								},
 								{
 									"key": "database_name",
-									"value": "Q1"
+									"value": "mydata"
 								},
 								{
 									"key": "table_name",
@@ -1111,7 +1108,363 @@
 								},
 								{
 									"key": "platform_name",
-									"value": "pg"
+									"value": "mysql"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Table Metadata",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cdbbc479-c8e1-4465-b062-66fc290b6b7b",
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is within the acceptable range\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the schema of the databases array\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.databases).to.be.an('array');\r",
+									"\r",
+									"  responseData.databases.forEach(function(database) {\r",
+									"    pm.expect(database).to.be.an('object');\r",
+									"    pm.expect(database.database_name).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(database.size).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(database.platform_type).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(database.owner).to.exist.and.to.be.a('string');\r",
+									"  });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Ensure each database object has non-empty fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.databases).to.be.an('array');\r",
+									"    responseData.databases.forEach(function(database) {\r",
+									"        pm.expect(database.database_name).to.exist.and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"        pm.expect(database.size).to.exist.and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"        pm.expect(database.platform_type).to.exist.and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"        pm.expect(database.owner).to.exist.and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5ab21397-8994-4208-85c1-924facf6f66f",
+								"exec": [
+									"pm.test(\"Check if 'sub', 'page' and 'size' query parameter is set\", function () {\r",
+									"    const queryParams = pm.request.url.query.all();\r",
+									"\r",
+									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
+									"    const pageParam = queryParams.find(param => param.key === 'page');\r",
+									"    const sizeParam = queryParams.find(param => param.key === 'size');\r",
+									"\r",
+									"    // Check if the 'sub' parameter is defined and not empty\r",
+									"    pm.expect(subParam).to.not.be.undefined;\r",
+									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(pageParam).to.not.be.undefined;\r",
+									"    pm.expect(pageParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(sizeParam).to.not.be.undefined;\r",
+									"    pm.expect(sizeParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "ca4ae0ad-b9bf-4d04-ab94-60e5b34a307e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/databases/?sub=Ik27&page=1&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"databases",
+								""
+							],
+							"query": [
+								{
+									"key": "sub",
+									"value": "Ik27"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Schemas",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a1db6a3e-34ea-4a28-801f-04ad2100f83a",
+								"exec": [
+									"pm.test(\"Check if 'sub', 'database_name' and platform_type query parameter is set\", function () {\r",
+									"    const queryParams = pm.request.url.query.all();\r",
+									"\r",
+									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
+									"    const database_nameParam = queryParams.find(param => param.key === 'database_name');\r",
+									"    const platform_typeParma=queryParams.find(param => param.key === 'platform_name');\r",
+									"\r",
+									"    // Check if the 'sub' parameter is defined and not empty\r",
+									"    pm.expect(subParam).to.not.be.undefined;\r",
+									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(database_nameParam).to.not.be.undefined;\r",
+									"    pm.expect(database_nameParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(platform_typeParma).to.not.be.undefined;\r",
+									"    pm.expect(platform_typeParma.value).to.be.a('string').that.is.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "06bf8546-4c1a-4c69-99c0-ca7562ec6618",
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.platform_type).to.exist;\r",
+									"  pm.expect(responseData.database_name).to.exist;\r",
+									"  pm.expect(responseData.owner).to.exist;\r",
+									"  pm.expect(responseData.size).to.exist;\r",
+									"  pm.expect(responseData.schemas).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Schemas array is present and contains expected number of elements\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.schemas).to.exist.and.to.be.an('array');\r",
+									"    pm.expect(responseData.schemas).to.have.lengthOf.at.least(1, \"Schemas array should not be empty\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Schema name within schemas array is a non-empty string\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.schemas).to.be.an('array');\r",
+									"  \r",
+									"  responseData.schemas.forEach(function(schema) {\r",
+									"    pm.expect(schema.schema_name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Schema name should not be empty\");\r",
+									"  });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "f65d2171-be45-4bab-8a3f-eda33c726247",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/schemas/?sub=Ik27&database_name=CDC&platform_name=mssql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"schemas",
+								""
+							],
+							"query": [
+								{
+									"key": "sub",
+									"value": "Ik27"
+								},
+								{
+									"key": "database_name",
+									"value": "CDC"
+								},
+								{
+									"key": "platform_name",
+									"value": "mssql"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tables and Stored Procedures",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "543f732a-f244-4d76-a13a-17eff68684ae",
+								"exec": [
+									"pm.test(\"Check if 'sub', 'database_name' ,'schema' and platform_type query parameter is set\", function () {\r",
+									"    const queryParams = pm.request.url.query.all();\r",
+									"\r",
+									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
+									"    const database_nameParam = queryParams.find(param => param.key === 'database_name');\r",
+									"    const schema_nameParam = queryParams.find(param => param.key === 'schema');\r",
+									"    const platform_typeParma=queryParams.find(param => param.key === 'platform_name');\r",
+									"\r",
+									"    // Check if the 'sub' parameter is defined and not empty\r",
+									"    pm.expect(subParam).to.not.be.undefined;\r",
+									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(database_nameParam).to.not.be.undefined;\r",
+									"    pm.expect(database_nameParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(schema_nameParam).to.not.be.undefined;\r",
+									"    pm.expect(schema_nameParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(platform_typeParma).to.not.be.undefined;\r",
+									"    pm.expect(platform_typeParma.value).to.be.a('string').that.is.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "37f1cfdd-7a0e-4f46-88aa-df2d692b35bd",
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields - platform_type, database_name, schema_name, and owner\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.platform_type).to.exist;\r",
+									"    pm.expect(responseData.database_name).to.exist;\r",
+									"    pm.expect(responseData.schema_name).to.exist;\r",
+									"    pm.expect(responseData.owner).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Tables array is present and contains at least one element\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.tables).to.exist.and.to.be.an('array').that.is.not.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Stored_procedures array is present in the response\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.stored_procedures).to.exist.and.to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "de71d712-b604-4d3f-b74a-f56573958185",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/tables_and_procedures/?sub=Ik27&platform_name=mssql&database=CDC&schema=dbo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tables_and_procedures",
+								""
+							],
+							"query": [
+								{
+									"key": "sub",
+									"value": "Ik27"
+								},
+								{
+									"key": "platform_name",
+									"value": "mssql"
+								},
+								{
+									"key": "database",
+									"value": "CDC"
+								},
+								{
+									"key": "schema",
+									"value": "dbo"
 								}
 							]
 						}
