@@ -32,10 +32,10 @@ jobs:
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
 
-      # Run API tests using Postman CLI
+      # Run API tests using Newman CLI
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" --reporters cli,html --reporter-html-export TestArtifact/htmlreport.html
+          newman run "${{ github.workspace }}/postman/collections/EDA.json" --reporters cli,html --reporter-html-export TestArtifact/htmlreport.html
         continue-on-error: true
 
       # Upload the report to TestArtifact directory
