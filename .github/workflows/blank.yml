@@ -18,7 +18,6 @@ jobs:
       - name: Run API tests
         run: |
           postman collection run "${{ github.workspace }}/postman/collections/EDA.json" \
-            --reporters cli,html \
             --reporter-html-export "${{ github.workspace }}/postman/reports/EDA-report.html" || true
         continue-on-error: true
 
