@@ -35,7 +35,7 @@ jobs:
       # Run API tests using Postman CLI
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,html --reporter-html-export TestArtifact/htmlreport.html
+          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" --reporters cli,html --reporter-html-export TestArtifact/htmlreport.html
         continue-on-error: true
 
       # Upload the report to TestArtifact directory
