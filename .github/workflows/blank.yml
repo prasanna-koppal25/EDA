@@ -1,28 +1,48 @@
-name: Automated API tests using Postman CLI
+name: Automated API Tests Using Postman CLI
 
 on: push
 
 jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Postman CLI
-        run: |
-          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Create directory for reports
+        run: mkdir -p TestArtifact
 
+      # Install Node.js on the runner
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x' # Use the latest LTS version of Node.js
+
+      # Install Newman globally and required reporters
+      - name: Install Newman and reporters
+        run: |
+          npm install -g newman@5 # Latest version of Newman as of August 2024
+          npm install -g newman-reporter-slackreporter@1.0.1 # Update to the latest stable version
+          npm install -g newman-reporter-html@2.0.3 # Update to the latest stable version
+          npm install -g newman-htmlextra@1.0.0 # Update to the latest stable version
+
+      # Install Postman CLI
+      - name: Install Postman CLI
+        run: curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
+      # Login to Postman CLI
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
 
+      # Run API tests using Postman CLI
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" \
-            --reporter-html-export "${{ github.workspace }}/postman/reports/EDA-report.html" || true
+          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" -r cli,html --reporter-html-export TestArtifact/htmlreport.html
         continue-on-error: true
 
-      - name: Upload HTML report
+      # Upload the report to TestArtifact directory
+      - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
-          name: postman-html-report
-          path: ${{ github.workspace }}/postman/reports/EDA-report.html
+          name: Reports
+          path: TestArtifact
