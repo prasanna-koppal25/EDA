@@ -7,11 +7,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/EDA.json"
+          postman collection run "${{ github.workspace }}/postman/collections/EDA.json" \
+            --reporters cli,html \
+            --reporter-html-export "${{ github.workspace }}/postman/reports/EDA-report.html"
+        continue-on-error: true
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v3
+        with:
+          name: postman-html-report
+          path: ${{ github.workspace }}/postman/reports/EDA-report.html
+
