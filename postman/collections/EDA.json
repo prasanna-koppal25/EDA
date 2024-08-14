@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshan25@gmail.com\",\r\n  \"sid\": \"Dars\",\r\n  \"sub\": \"Ik28\"\r\n}",
+							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshan@gmail.com\",\r\n  \"sid\": \"Dars\",\r\n  \"sub\": \"Ik28\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,15 +81,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/save-user",
-							"protocol": "http",
+							"raw": "https://da3b-61-3-23-30.ngrok-free.app/save-user",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"save-user"
 							]
@@ -183,15 +181,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/authenticate-user?sub=Ik28",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/authenticate-user?sub=Ik28",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"authenticate-user"
 							],
@@ -307,15 +303,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/user/verify-connection?db=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/user/verify-connection?db=mssql",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"user",
 								"verify-connection"
@@ -426,15 +420,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/users/add-connection?sub=Ik28&db=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/users/add-connection?sub=Ik28&db=mssql",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"users",
 								"add-connection"
@@ -530,15 +522,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/users/delete-connection?sub=Ik27&db=pg",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/users/delete-connection?sub=Ik27&db=pg",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"users",
 								"delete-connection"
@@ -639,15 +629,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/connect?sub=Ik27",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/connect?sub=Ik27",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"connect"
 							],
@@ -745,15 +733,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/tables/?sub=Ik28",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables/?sub=Ik28",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"tables",
 								""
@@ -890,15 +876,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/detailed_tables/?sub=Ik28&page=1&size=10",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/detailed_tables/?sub=Ik28&page=1&size=10",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"detailed_tables",
 								""
@@ -1107,15 +1091,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/table-details/?sub=Ik28&database_name=cdcDB&table_name=product_master&platform_name=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/table-details/?sub=Ik28&database_name=cdcDB&table_name=product_master&platform_name=mssql",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"table-details",
 								""
@@ -1230,15 +1212,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/databases/?sub=Ik28&page=1&size=10",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/databases/?sub=Ik28&page=1&size=10",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"databases",
 								""
@@ -1352,15 +1332,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/schemas/?sub=Ik28&database_name=CDC&platform_name=mssql",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/schemas/?sub=Ik28&database_name=CDC&platform_name=mssql",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"schemas",
 								""
@@ -1472,15 +1450,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/tables_and_procedures/?sub=Ik28&platform_name=mssql&database=CDC&schema=dbo",
+							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables_and_procedures/?sub=Ik28&platform_name=mssql&database=CDC&schema=dbo",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"da3b-61-3-23-30",
+								"ngrok-free",
+								"app"
 							],
-							"port": "8000",
 							"path": [
 								"tables_and_procedures",
 								""
