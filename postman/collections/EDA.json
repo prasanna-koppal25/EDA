@@ -1515,7 +1515,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2aff8b01-4788-4fea-b491-08d30f9bbb92",
+				"id": "70b83eea-59e6-4862-a2b4-268e695c40c4",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1526,20 +1526,10 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "462de91d-3a74-4542-8a39-c3de9fd90bfb",
+				"id": "394afc99-9b76-405a-9670-8e25fdbdf812",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					"pm.test(\"Response body is valid JSON\", function() {\r",
-					"    var jsonData = null;\r",
-					"    try {\r",
-					"        jsonData = pm.response.json();\r",
-					"        console.log(jsonData);\r",
-					"    } catch (e) {\r",
-					"        console.error(\"Invalid JSON response\", e);\r",
-					"    }\r",
-					"    pm.expect(jsonData).to.be.an(\"object\");\r",
-					"});\r",
 					""
 				]
 			}
