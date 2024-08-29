@@ -36,6 +36,9 @@
 									"  pm.expect(responseData.s_ID).to.be.a('string');\r",
 									"});\r",
 									"\r",
+									"// Set the 'sub' value directly\r",
+									"let subValue = \"Ik22\";\r",
+									"pm.environment.set(\"sub\", subValue);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -73,7 +76,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshanas@gmail.com\",\r\n  \"sid\": \"Darskjns\",\r\n  \"sub\": \"Ik29\"\r\n}",
+							"raw": "{\r\n  \"nickname\": \"Darshan\",\r\n  \"name\": \"Darshan k\",\r\n  \"email\": \"Darshanas@gmail.com\",\r\n  \"sid\": \"Darskjns\",\r\n  \"sub\": \"Ik32\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,13 +84,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://da3b-61-3-23-30.ngrok-free.app/save-user",
-							"protocol": "https",
+							"raw": "http://localhost:8000/save-user",
+							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"save-user"
 							]
@@ -125,9 +127,6 @@
 									"pm.test(\"Response has the Content-Type header\", function () {\r",
 									"    pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
-									"\r",
-									"\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -181,20 +180,19 @@
 							}
 						},
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/authenticate-user?sub=Ik29",
+							"raw": "http://localhost:8000/authenticate-user?sub={{sub}}",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"authenticate-user"
 							],
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik29"
+									"value": "{{sub}}"
 								}
 							]
 						}
@@ -295,7 +293,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"sa\",\r\n  \"password\": \"darshan1234\",\r\n  \"port\": 1433,\r\n  \"host\": \"localhost\",\r\n  \"database\": \"CDC\"\r\n}",
+							"raw": "{\r\n  \"username\": \"root\",\r\n  \"password\": \"root\",\r\n  \"port\": 3306,\r\n  \"host\": \"localhost\",\r\n  \"database\": \"mydata\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,13 +301,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/user/verify-connection?db=mssql",
+							"raw": "http://localhost:8000/user/verify-connection?db=MySQL",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"user",
 								"verify-connection"
@@ -317,7 +314,7 @@
 							"query": [
 								{
 									"key": "db",
-									"value": "mssql"
+									"value": "MySQL"
 								}
 							]
 						}
@@ -412,7 +409,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"sa\",\r\n  \"password\": \"darshan1234\",\r\n  \"port\": 1433,\r\n  \"host\": \"localhost\",\r\n  \"database\": \"master\"\r\n}",
+							"raw": "{\r\n  \"username\": \"root\",\r\n  \"password\": \"root\",\r\n  \"port\": 3306,\r\n  \"host\": \"localhost\",\r\n  \"database\": \"mydata\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -420,13 +417,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/users/add-connection?sub=Ik29&db=mssql",
+							"raw": "http://localhost:8000/users/add-connection?sub={{sub}}&db=MySQL",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"users",
 								"add-connection"
@@ -434,11 +430,11 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik29"
+									"value": "{{sub}}"
 								},
 								{
 									"key": "db",
-									"value": "mssql"
+									"value": "MySQL"
 								}
 							]
 						}
@@ -522,13 +518,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/users/delete-connection?sub=Ik27&db=pg",
+							"raw": "http://localhost:8000/users/delete-connection?sub=Ik28&db=mssql",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"users",
 								"delete-connection"
@@ -536,11 +531,11 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik27"
+									"value": "Ik28"
 								},
 								{
 									"key": "db",
-									"value": "pg"
+									"value": "mssql"
 								}
 							]
 						}
@@ -631,20 +626,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/connect?sub=Ik29",
+							"raw": "http://localhost:8000/connect?sub={{sub}}",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"connect"
 							],
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik29"
+									"value": "{{sub}}"
 								}
 							]
 						}
@@ -1099,13 +1093,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/table-details/?sub=Ik29&database_name=cdcDB&table_name=product_master&platform_name=mssql",
+							"raw": "http://localhost:8000/table-details/?sub=Ik29&database_name=cdcDB&table_name=product_master&platform_name=mssql",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"table-details",
 								""
@@ -1220,13 +1213,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/databases/?sub=Ik29&page=1&size=10",
+							"raw": "http://localhost:8000/databases/?sub={{sub}}&page=1&size=10",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"databases",
 								""
@@ -1234,7 +1226,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik29"
+									"value": "{{sub}}"
 								},
 								{
 									"key": "page",
@@ -1340,21 +1332,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/schemas/?sub=Ik29&database_name=CDC&platform_name=mssql",
+							"raw": "http://localhost:8000/?sub={{sub}}&database_name=CDC&platform_name=MySQL",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
-								"schemas",
 								""
 							],
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik29"
+									"value": "{{sub}}"
 								},
 								{
 									"key": "database_name",
@@ -1362,7 +1352,7 @@
 								},
 								{
 									"key": "platform_name",
-									"value": "mssql"
+									"value": "MySQL"
 								}
 							]
 						}
@@ -1458,13 +1448,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://da3b-61-3-23-30.ngrok-free.app/tables_and_procedures/?sub=Ik29&platform_name=mssql&database=CDC&schema=dbo",
+							"raw": "http://localhost:8000/tables_and_procedures/?sub={{sub}}&platform_name=mssql&database=CDC&schema=dbo",
 							"protocol": "http",
 							"host": [
-								"da3b-61-3-23-30",
-								"ngrok-free",
-								"app"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
 								"tables_and_procedures",
 								""
@@ -1472,7 +1461,7 @@
 							"query": [
 								{
 									"key": "sub",
-									"value": "Ik29"
+									"value": "{{sub}}"
 								},
 								{
 									"key": "platform_name",
@@ -1493,6 +1482,223 @@
 				}
 			],
 			"id": "901fff04-c65d-4045-9e05-55e41f6dd65b"
+		},
+		{
+			"name": "ETL Tables",
+			"item": [
+				{
+					"name": "List of Tables",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "006b6f99-72c7-4a0a-919b-1a6a9c7cb5d7",
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the response schema for objectName array\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.objectName).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is within an acceptable range\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c30f32d5-68e8-4c52-a3d5-48f38ed3249e",
+								"exec": [
+									"pm.test(\"Check if 'sub', 'pipeline_id' ,'parent_id' and platform_type query parameter is set\", function () {\r",
+									"    const queryParams = pm.request.url.query.all();\r",
+									"\r",
+									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
+									"    const pipeline_idParam = queryParams.find(param => param.key === 'pipeline_id');\r",
+									"    const parent_idParam = queryParams.find(param => param.key === 'parent_id');\r",
+									"    const connection_nameParma=queryParams.find(param => param.key === 'connection_name');\r",
+									"\r",
+									"    // Check if the 'sub' parameter is defined and not empty\r",
+									"    pm.expect(subParam).to.not.be.undefined;\r",
+									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(pipeline_idParam).to.not.be.undefined;\r",
+									"    pm.expect(pipeline_idParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(parent_idParam).to.not.be.undefined;\r",
+									"    pm.expect(parent_idParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(connection_nameParma).to.not.be.undefined;\r",
+									"    pm.expect(connection_nameParma.value).to.be.a('string').that.is.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5df10e1a-ac13-4920-b7c0-ec01df52ff81",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/list_of_tables/?sub={{sub}}&pipeline_id=lfakje&parent_id=kajse&connection_name=PostgreSQL",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"list_of_tables",
+								""
+							],
+							"query": [
+								{
+									"key": "sub",
+									"value": "{{sub}}"
+								},
+								{
+									"key": "pipeline_id",
+									"value": "lfakje"
+								},
+								{
+									"key": "parent_id",
+									"value": "kajse"
+								},
+								{
+									"key": "connection_name",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of Fields",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e88aa502-04a9-439d-9706-a7e83c47eccc",
+								"exec": [
+									"pm.test(\"Check if 'sub', 'pipeline_id' ,'parent_id' and platform_type query parameter is set\", function () {\r",
+									"    const queryParams = pm.request.url.query.all();\r",
+									"\r",
+									"    const subParam = queryParams.find(param => param.key === 'sub');\r",
+									"    const pipeline_idParam = queryParams.find(param => param.key === 'pipeline_id');\r",
+									"    const parent_idParam = queryParams.find(param => param.key === 'parent_id');\r",
+									"    const connection_nameParma=queryParams.find(param => param.key === 'connection_name');\r",
+									"\r",
+									"    // Check if the 'sub' parameter is defined and not empty\r",
+									"    pm.expect(subParam).to.not.be.undefined;\r",
+									"    pm.expect(subParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(pipeline_idParam).to.not.be.undefined;\r",
+									"    pm.expect(pipeline_idParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(parent_idParam).to.not.be.undefined;\r",
+									"    pm.expect(parent_idParam.value).to.be.a('string').that.is.not.empty;\r",
+									"\r",
+									"    pm.expect(connection_nameParma).to.not.be.undefined;\r",
+									"    pm.expect(connection_nameParma.value).to.be.a('string').that.is.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "60874504-e04b-4693-b6da-c1fe6cb87f98",
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Fields array should have name and type properties\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.fields).to.be.an('array');\r",
+									"    responseData.fields.forEach(function(field) {\r",
+									"        pm.expect(field).to.have.property('name');\r",
+									"        pm.expect(field).to.have.property('type');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "3811e1ac-0dc5-4ad7-9faf-43b839ff965a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/list_of_fields/?sub={{sub}}&connection_name=PostgreSQL&pipelineId=asenk&parentId=fkaen&object_name=quality_control",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"list_of_fields",
+								""
+							],
+							"query": [
+								{
+									"key": "sub",
+									"value": "{{sub}}"
+								},
+								{
+									"key": "connection_name",
+									"value": "PostgreSQL"
+								},
+								{
+									"key": "pipelineId",
+									"value": "asenk"
+								},
+								{
+									"key": "parentId",
+									"value": "fkaen"
+								},
+								{
+									"key": "object_name",
+									"value": "quality_control"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1393a759-92cf-4425-9055-26b56d292398"
 		}
 	],
 	"event": [
